@@ -54,6 +54,8 @@ module.exports = (options) => {
     defaultLocale: options.locales[0],
     queryParameters: ['lang'],
     cookieName: 'i18n',
+    cookieMaxAge: 900000,
+    cookieSecure: false
   }, options);
 
   const warnResult = function(result, warningString) {
@@ -165,7 +167,7 @@ module.exports = (options) => {
   };
 
   const setLocale = (res, locale) => {
-    res.cookie(options.cookieName, locale, { maxAge: 900000, httpOnly: true });
+    res.cookie(options.cookieName, locale, { maxAge: options.cookieMaxAge, httpOnly: true, secure: options.cookieSecure });
   };
 
   const addSelectedLocaleArgumentIfNotPresent = (args, selectedLocale) => {
